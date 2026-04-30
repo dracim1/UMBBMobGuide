@@ -35,13 +35,11 @@ public class SearchActivity extends AppCompatActivity {
 
         cardPlaceholder = findViewById(R.id.cardPlaceholder);
 
-        // container للنتائج
         resultsContainer = new LinearLayout(this);
         resultsContainer.setOrientation(LinearLayout.VERTICAL);
         LinearLayout parent = (LinearLayout) cardPlaceholder.getParent();
         parent.addView(resultsContainer);
 
-        // Search bar
         EditText searchInput = findViewById(R.id.searchInput);
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
@@ -59,7 +57,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        // Bottom navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavSearch);
         bottomNav.setSelectedItemId(R.id.nav_search);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -80,13 +77,14 @@ public class SearchActivity extends AppCompatActivity {
     private void performSearch(String query) {
         resultsContainer.removeAllViews();
 
-        // جلب البيانات من DataManager
-        String[][] searchData = DataManager.getSearchData();
+        // get faculties with its data
+        ArrayList<faculty> allFaculties = DataManager.getFaculties();
 
-        List<String[]> results = new ArrayList<>();
-        for (String[] item : searchData) {
-            if (item[0].toLowerCase().contains(query.toLowerCase())) {
-                results.add(item);
+        // filter faculties based on query
+        List<faculty> results = new ArrayList<>();
+        for (faculty f : allFaculties) {
+            if (f.facname.toLowerCase().contains(query.toLowerCase())) {
+                results.add(f);
             }
         }
 
@@ -101,17 +99,19 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
 
-        for (String[] item : results) {
-            resultsContainer.addView(buildResultRow(item[0], item[1]));
+        for (faculty f : results) {
+            resultsContainer.addView(buildResultRow(f));
         }
     }
 
-    private View buildResultRow(String name, String category) {
+    private View buildResultRow(faculty f) {
         CardView card = new CardView(this);
+        //set layout width and height
         LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
+        //Designing Card View
         cardParams.setMargins(0, 0, 0, 12);
         card.setLayoutParams(cardParams);
         card.setRadius(24f);
@@ -123,7 +123,7 @@ public class SearchActivity extends AppCompatActivity {
         inner.setGravity(Gravity.CENTER_VERTICAL);
         inner.setPadding(32, 24, 32, 24);
 
-        // Badge
+        // Badge: Faculty أو Institute
         TextView badge = new TextView(this);
         LinearLayout.LayoutParams badgeParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -131,7 +131,7 @@ public class SearchActivity extends AppCompatActivity {
         );
         badgeParams.setMarginEnd(16);
         badge.setLayoutParams(badgeParams);
-        badge.setText(category);
+        badge.setText(f.facname.toLowerCase().contains("institute") ? "Institute" : "Faculty");
         badge.setTextSize(10f);
         badge.setTextColor(ContextCompat.getColor(this, R.color.blue_primary));
         badge.setBackgroundColor(0xFFE8F0FB);
@@ -142,7 +142,7 @@ public class SearchActivity extends AppCompatActivity {
         tvName.setLayoutParams(new LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
         ));
-        tvName.setText(name);
+        tvName.setText(f.facname);
         tvName.setTextSize(14f);
         tvName.setTextColor(ContextCompat.getColor(this, R.color.text_dark));
 
@@ -157,9 +157,19 @@ public class SearchActivity extends AppCompatActivity {
         inner.addView(chevron);
         card.addView(inner);
 
-        card.setOnClickListener(v ->
-                startActivity(new Intent(this, FacultyActivity.class))
-        );
+        // On click: open detail activity
+        card.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("DETAIL_TYPE", "faculty");
+            intent.putExtra("DETAIL_NAME", f.facname);
+            intent.putExtra("DETAIL_DESCRIPTION", f.description);
+            intent.putExtra("DETAIL_PHONE", f.phone);
+            intent.putExtra("DETAIL_EMAIL", f.email);
+            intent.putExtra("DETAIL_LOCATION", f.location);
+            intent.putExtra("DETAIL_LATITUDE", f.latitude);
+            intent.putExtra("DETAIL_LONGITUDE", f.longitude);
+            startActivity(intent);
+        });
 
         return card;
     }
