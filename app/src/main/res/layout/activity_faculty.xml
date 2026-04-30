@@ -10,58 +10,61 @@
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue_primary"
             app:elevation="4dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:paddingTop="50dp"
-            android:id="@+id/titlebar"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/light_blue"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:paddingTop="50dp"
+                android:id="@+id/titlebar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/umbblogo"
-                    android:contentDescription="logo"
-                    app:tint="@color/white" />
+                android:layout_height="100dp"
+                android:background="@color/light_blue"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationContentDescription="Back"
+                app:contentInsetStartWithNavigation="0dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/umbblogo"
+                        android:contentDescription="logo"
+                        app:tint="@color/white" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UMBB MobGuide"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Digital Campus Guide"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="11sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UMBB MobGuide"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Digital Campus Guide"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="11sp" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -118,7 +121,7 @@
         android:layout_marginBottom="100dp"
         android:divider="@null"
         android:dividerHeight="0dp"
-    >
+        >
     </ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

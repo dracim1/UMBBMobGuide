@@ -20,6 +20,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        // ── Back button ────────────────────────────────────────────────────
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarDetail);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         // ── Bottom navigation ──────────────────────────────────────────────
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavDetail);
         bottomNav.setOnItemSelectedListener(item -> {

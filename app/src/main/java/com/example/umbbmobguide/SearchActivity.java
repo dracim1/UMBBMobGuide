@@ -57,6 +57,9 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarSearch);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavSearch);
         bottomNav.setSelectedItemId(R.id.nav_search);
         bottomNav.setOnItemSelectedListener(item -> {

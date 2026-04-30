@@ -17,6 +17,9 @@ public class FacultyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.titlebar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavFaculty);
         bottomNav.setSelectedItemId(R.id.nav_faculties);
         bottomNav.setOnItemSelectedListener(item -> {
