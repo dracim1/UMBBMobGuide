@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/light_blue"
-                android:paddingStart="16dp"
+                android:paddingStart="0dp"
                 android:paddingEnd="16dp"
                 app:navigationIcon="@drawable/ic_back"
                 app:navigationContentDescription="Back"
