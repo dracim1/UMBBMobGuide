@@ -63,8 +63,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="110dp"
-        android:paddingBottom="72dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="78dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:clipToPadding="false"
